@@ -1,0 +1,48 @@
+.bg-purple {
+  background-color: #86107B;
+}
+
+.display-inline-block {
+  display: inline-block;
+}
+
+.w-10 {
+  width: 10%;
+}
+
+.w-20 {
+  width: 20%;
+}
+
+.w-30 {
+  width: 30%;
+}
+.w-40 {
+  width: 40%;
+}
+.w-50 {
+  width: 50%;
+}
+.w-60 {
+  width: 60%;
+}
+.w-70 {
+  width: 70%;
+}
+.w-80 {
+  width: 80%;
+}
+
+.delete-btn {
+  font-size: 0.65rem;
+}
+
+@media screen and (min-height: 720px) {
+  .delete-btn {
+    font-size: 1rem;
+  }
+
+  #delete-profile, #update-profile {
+    width: 50%;
+  }
+}

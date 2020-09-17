@@ -1,0 +1,41 @@
+{% extends "base2.html" %}
+{% block title %}Welcome {{ name }}{% endblock %}
+{% block body %}
+{% csrf_token %}
+<div class="container">
+  <div class="row my-3">
+    <div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
+    <div class="col-10 col-md-8 col-lg-6 col-xl-4 text-center">
+      <div class="row w-100 text-left">
+        <div class="col-10 col-md-9 col-lg-10 col-xl-11">
+          <input type="text" id="todo" class="form-control" placeholder="{{ name }}, Add a ToDo..." />
+        </div>
+        <div class="col-2 col-md-3 col-lg-2 col-xl-1">
+          <button type="button" class="btn btn-success " id="add_todo">Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
+  </div>
+  <div class="row my-1">
+    <div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
+    <div class="col-10 col-md-8 col-lg-6 col-xl-4" id="alerts">
+
+    </div>
+    <div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
+  </div>
+  <div class="row my-1">
+    <div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
+    <div class="col-10 col-md-8 col-lg-6 col-xl-4">
+      <ul class="list-group" id="todo-list">
+        <li class="list-group-item bg-purple text-center text-light list-group-title" id="todo-root">Your Todo's</li>
+        <li class="list-group-item text-secondary text-center" id="empty-todo">{{ name }}, Your Todo is Empty :-0</li>
+      </ul>
+    </div>
+    <div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
+  </div>
+</div>
+{% endblock %}
+{% block script %}
+<script src="/static/js/session.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}

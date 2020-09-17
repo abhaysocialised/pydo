@@ -1,0 +1,7 @@
+.bg-purple {
+  background-color: #86107B;
+}
+
+#submit-btn:hover {
+  box-shadow: 10px 10px 10px 10px #86107B00;
+}

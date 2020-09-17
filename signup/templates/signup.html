@@ -1,0 +1,39 @@
+{% extends "base1.html" %}
+{% block title %}Sign-up with PyDo{% endblock %}
+{% block body %}
+
+<form class="card my-4 w-75 mx-auto" method="POST" action="#">
+  {% csrf_token %}
+  <div class="card-header bg-purple text-light text-center">
+    <large>Sign-up</large>
+  </div>
+  <div class="text-center form-group text-muted my-1 py-1 px-1">
+    <small class="text-center">PyDo the ToDo of future.</small>
+  </div>
+  <div class="form-group my-1 py-1 px-1">
+    <input type="text" class="form-control" name="name" id="name" value="{{ usr.name }}" aria-describedby="nameHelp" placeholder="Enter Your Name" required>
+    <small id="nameError" class="text-danger text-center">{{ nameError }}</small>
+  </div>
+  <div class="form-group my-1 py-1 px-1">
+    <input type="email" class="form-control" name="email" id="email" value="{{ usr.email }}" aria-describedby="emailHelp" placeholder="Enter email" required>
+    <small id="emailError" class="text-danger text-center">{{ emailError }}</small>
+  </div>
+  <div class="form-group my-1 py-1 px-1">
+    <input type="password" class="form-control" name="password" id="password" value="{{ usr.password }}" placeholder="Create a Password" required>
+    <small id="passwordError" class="text-danger text-center">{{ passwordError }}</small>
+  </div>
+  <div class="form-check">
+    <small class="form-check-label text-muted display-block text-center" for="exampleCheck1">
+      By Clicking Sign-up You accept our Terms and Conditions
+    </small>
+  </div>
+  <button type="submit" class="btn bg-purple my-2 text-light w-50 text-center mx-auto" id="submit-btn">Sign-up</button>
+  <div class="text-center form-group my01 py-1 px-1">
+    Already have an account? <a href="/log-in">Log-in</a>.
+  </div>
+</form>
+
+{% endblock %}
+{% block script %}
+<script src="/static/js/signup.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}

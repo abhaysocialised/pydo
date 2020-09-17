@@ -1,0 +1,82 @@
+{% extends "base2.html" %}
+{% block title %}Update Profile{% endblock %}
+{% block body %}
+{% csrf_token %}
+<div class="row my-3 w-100 mx-auto">
+  <div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
+  <div class="col-10 col-md-8 col-lg-6 col-xl-4" id="updates"></div>
+  <div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
+</div>
+<div class="row my-3 w-100 mx-auto">
+  <div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
+  <div class="col-10 col-md-8 col-lg-6 col-xl-4 text-center">
+    <div class="card w-100 mx-auto">
+      <div class="card-header text-center bg-purple text-light">
+        <large>Update Profile</large>
+      </div>
+      <div class="card-body">
+        <div class="card-text">
+          <div class="form-group">
+            <input type="text" name="name" id="name" class="form-control" placeholder="Your name..." value="{{ name }}">
+            <div id="nameError" class="text-danger"></div>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" id="email" class="form-control" placeholder="Your email..." value="{{ email }}" disabled />
+            <small class="text-secondary">You can update email after version 2.0 of PyDo</small>
+          </div>
+          <div class="form-group">
+            <input type="password" name="old-password" id="old-password" class="form-control" placeholder="Old Password">
+          </div>
+          <div class="form-group">
+            <input type="password" name="new-password" id="new-password" class="form-control" placeholder="New Password">
+          </div>
+          <div class="form-group">
+            <div id="error" class="text-danger"></div>
+          </div>
+          <div class="form-group">
+            <div class="row w-100 mx-auto">
+              <div class="col-12 col-md-6">
+                <button type="button" id="update-profile" class="btn btn-primary w-70 my-1">Update Profile</button>
+              </div>
+              <div class="col-12 col-md-6">
+                <button type="button" id="delete-profile" class="btn btn-danger w-80 my-1" data-toggle="modal" data-target="#deleteAccount">Delete Profile for Ever!</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
+</div>
+
+<!-- Delete btn modal -->
+<div class="modal fade" id="deleteAccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Are you sure to Delete Your PyDo Account?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="text-dark">
+          We are feeling Sad :-( because you are leaving us...
+        </p>
+        <p class="form-group">
+          <input type="password" id="delete-password-confirm" class="form-control" placeholder="Confirm Password!" />
+        </p>
+        <p id="delete-error" class="text-danger"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="delete-confirm">Delete Account :-(</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block script %}
+<script src="/static/js/profile.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
