@@ -1,2 +1,2 @@
 # pydo
-Website : [a PyDo](https://pydo.herokuapp.com/)
+Website : [PyDo](https://pydo.herokuapp.com/)
