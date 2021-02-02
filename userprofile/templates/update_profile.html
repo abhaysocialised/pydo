@@ -10,8 +10,8 @@
 <div class="row my-3 w-100 mx-auto">
   <div class="col-1 col-md-2 col-lg-3 col-xl-4"></div>
   <div class="col-10 col-md-8 col-lg-6 col-xl-4 text-center">
-    <div class="card w-100 mx-auto">
-      <div class="card-header text-center bg-purple text-light">
+    <div class="card w-100 mx-auto bg-red">
+      <div class="card-header text-center bg-red text-light">
         <large>Update Profile</large>
       </div>
       <div class="card-body">
@@ -21,14 +21,17 @@
             <div id="nameError" class="text-danger"></div>
           </div>
           <div class="form-group">
-            <input type="email" name="email" id="email" class="form-control" placeholder="Your email..." value="{{ email }}" disabled />
-            <small class="text-secondary">You can update email after version 2.0 of PyDo</small>
+            <input type="email" name="email" id="email" class="form-control" placeholder="Your email..."
+              value="{{ email }}" disabled />
+            <small class="text-light">You can update email after version 2.0 of PyDo</small>
           </div>
           <div class="form-group">
-            <input type="password" name="old-password" id="old-password" class="form-control" placeholder="Old Password">
+            <input type="password" name="old-password" id="old-password" class="form-control"
+              placeholder="Old Password">
           </div>
           <div class="form-group">
-            <input type="password" name="new-password" id="new-password" class="form-control" placeholder="New Password">
+            <input type="password" name="new-password" id="new-password" class="form-control"
+              placeholder="New Password">
           </div>
           <div class="form-group">
             <div id="error" class="text-danger"></div>
@@ -39,7 +42,8 @@
                 <button type="button" id="update-profile" class="btn btn-primary w-90 my-1">Update Profile</button>
               </div>
               <div class="col-12 col-md-6">
-                <button type="button" id="delete-profile" class="btn btn-danger w-90 my-1" data-toggle="modal" data-target="#deleteAccount">Delete Profile for Ever!</button>
+                <button type="button" id="delete-profile" class="btn btn-danger w-90 my-1 bg-gradred"
+                  data-toggle="modal" data-target="#deleteAccount">Delete Profile for Ever!</button>
               </div>
             </div>
           </div>
@@ -51,7 +55,8 @@
 </div>
 
 <!-- Delete btn modal -->
-<div class="modal fade" id="deleteAccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteAccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -79,106 +84,106 @@
 {% endblock %}
 {% block script %}
 <script type="text/javascript" charset="utf-8">
-$(document).ready(function () {
-  const name = $("#name");
-  const old_name = name.val()
-  const oldPassword = $("#old-password");
-  const newPassword = $("#new-password");
-  const updateProfile = $("#update-profile");
-  const deleteProfile = $("#delete-profile");
-  const updates = $("#updates");
-  const error = $("#error");
+  $(document).ready(function () {
+    const name = $("#name");
+    const old_name = name.val()
+    const oldPassword = $("#old-password");
+    const newPassword = $("#new-password");
+    const updateProfile = $("#update-profile");
+    const deleteProfile = $("#delete-profile");
+    const updates = $("#updates");
+    const error = $("#error");
 
-  name.on("input", () => {
-    if ((name.val().length > 50) || (name.val().length < 2)) {
-      $("#nameError").text("Please enter Your Legal name and your name should not be greater than 50 Characters.");
-    } else {
-      $("#nameError").text("");
-    }
-  });
-
-  newPassword.on("input",
-    () => {
-      if (newPassword.val().length < 8) {
-        error.text("Please create a password greater than or equal to 8.");
+    name.on("input", () => {
+      if ((name.val().length > 50) || (name.val().length < 2)) {
+        $("#nameError").text("Please enter Your Legal name and your name should not be greater than 50 Characters.");
       } else {
-        error.text("");
+        $("#nameError").text("");
       }
     });
 
-  updateProfile.on("click",
-    () => {
-      if (true) {
-        $.ajax({
-          url: "/ajax/update-profile/",
-          type: "post",
-          data: {
-            csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
-            name: name.val(),
-            old_password: oldPassword.val(),
-            new_password: newPassword.val(),
-          },
-          success: (data, status = null, xhr = null) => {
-            if (data.name_updated) {
-              updates.append(`<div class="alert alert-success alert-dismissible fade show" role="alert">
+    newPassword.on("input",
+      () => {
+        if (newPassword.val().length < 8) {
+          error.text("Please create a password greater than or equal to 8.");
+        } else {
+          error.text("");
+        }
+      });
+
+    updateProfile.on("click",
+      () => {
+        if (true) {
+          $.ajax({
+            url: "/ajax/update-profile/",
+            type: "post",
+            data: {
+              csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
+              name: name.val(),
+              old_password: oldPassword.val(),
+              new_password: newPassword.val(),
+            },
+            success: (data, status = null, xhr = null) => {
+              if (data.name_updated) {
+                updates.append(`<div class="alert alert-success alert-dismissible fade show" role="alert">
                 <small><strong>Congrats !!!</strong>Name updated Successfully...</small>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
                 </div>`);
-            } else {
-              $("#nameError").text(`${data.nameError}`)
-            }
-            if (data.password_updated) {
-              updates.append(`<div class="alert alert-success alert-dismissible fade show" role="alert">
+              } else {
+                $("#nameError").text(`${data.nameError}`)
+              }
+              if (data.password_updated) {
+                updates.append(`<div class="alert alert-success alert-dismissible fade show" role="alert">
                 <small><strong>Congrats !!!</strong>Password updated Successfully...</small>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
                 </div>`);
-              oldPassword.val("")
-              newPassword.val("")
+                oldPassword.val("")
+                newPassword.val("")
+              } else {
+                error.text(data.passwordError)
+              }
+            },
+            error: (data, status = null, xhr = null) => {
+              alert("Bad Request....")
+            },
+          })
+        }
+
+      });
+
+    const deleteConfirmBtn = $("#delete-confirm");
+    const deleteConfirmPasswd = $("#delete-password-confirm");
+    deleteConfirmPasswd.on("input", () => {
+      $("#delete-error").text("")
+    });
+    deleteConfirmBtn.on("click", () => {
+      if (deleteConfirmPasswd.val() == "") {
+        $("#delete-error").text("Empty password not accepted...");
+      } else {
+        $.ajax({
+          url: "/ajax/delete-account/",
+          type: "post",
+          data: {
+            csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
+            password: deleteConfirmPasswd.val(),
+          },
+          success: (data, status = null, xhr = null) => {
+            if (data.deleted) {
+              window.location = "/logout";
             } else {
-              error.text(data.passwordError)
+              $("#delete-error").text(data.error);
             }
           },
           error: (data, status = null, xhr = null) => {
-            alert("Bad Request....")
+            alert("Bad Request...")
           },
-        })
+        });
       }
-
     });
-
-  const deleteConfirmBtn = $("#delete-confirm");
-  const deleteConfirmPasswd = $("#delete-password-confirm");
-  deleteConfirmPasswd.on("input", () => {
-    $("#delete-error").text("")
   });
-  deleteConfirmBtn.on("click", () => {
-    if (deleteConfirmPasswd.val() == "") {
-      $("#delete-error").text("Empty password not accepted...");
-    } else {
-      $.ajax({
-        url: "/ajax/delete-account/",
-        type: "post",
-        data: {
-          csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
-          password: deleteConfirmPasswd.val(),
-        },
-        success: (data, status = null, xhr = null) => {
-          if (data.deleted) {
-            window.location = "/logout";
-          } else {
-            $("#delete-error").text(data.error);
-          }
-        },
-        error: (data, status = null, xhr = null) => {
-          alert("Bad Request...")
-        },
-      });
-    }
-  });
-});
 </script>
 {% endblock %}
